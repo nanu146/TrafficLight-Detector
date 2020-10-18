@@ -12,7 +12,8 @@ import numpy as np
 def detect(filepath, file):
 
     font = cv2.FONT_HERSHEY_SIMPLEX
-    img = cv2.imread(filepath+file)
+    imagePath = os.path.join(filepath,file)
+    img = cv2.imread(imagePath)
     cimg = img
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -109,18 +110,18 @@ def detect(filepath, file):
                 cv2.circle(masky, (i[0], i[1]), i[2]+30, (255, 255, 255), 2)
                 cv2.putText(cimg,'YELLOW',(i[0], i[1]), font, 1,(255,0,0),2,cv2.LINE_AA)
 
-    cv2.imshow('detected results', cimg)
-    cv2.imwrite(path+'//result//'+file, cimg)
+    #cv2.imshow('detected results', cimg)
+    cv2.imwrite(os.path.join(path,'result',file), cimg)
     # cv2.imshow('maskr', maskr)
     # cv2.imshow('maskg', maskg)
     # cv2.imshow('masky', masky)
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 
 if __name__ == '__main__':
 
-    path = os.path.abspath('..')+'//light//'
+    path = os.path.join(os.path.abspath('.'),'light')
     for f in os.listdir(path):
         print f
         if f.endswith('.jpg') or f.endswith('.JPG'):
